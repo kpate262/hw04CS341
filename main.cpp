@@ -253,7 +253,7 @@ int main()
           cout << "not found" << endl;
       }
       else{
-          cout << examavg << endl;
+          cout << name << ":" << examavg << endl;
       }
     
     cout << "Please enter a name (or #)> ";
