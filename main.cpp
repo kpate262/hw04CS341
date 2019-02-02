@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <string.h>
 #include <sstream>
 #include <vector>
 #include <list>
@@ -89,11 +90,7 @@ void myprint(const vector<T>& V)
 template<typename T>
 void myprint(const vector<T>& V, std::function<string(T)> getdata)
 {
-  //
-  // TODO: replace the index-based for loop with a range-based for loop, aka
-  // a "foreach" loop.  Feel free to use auto.
-  // 
-  
+
   for(const auto &g: V){
       cout << getdata(g) << " ";
   }
@@ -107,40 +104,10 @@ void myprint(const vector<T>& V, std::function<string(T)> getdata)
 // 
 // Sorts the elements of V into ascending order.
 // 
-// 
-// 
-template<typename T>
-void insertionSort(vector<T> &arr) 
-{ 
-    int i = 1;
-    auto key = arr[0];
-    int j = 0; 
-   for (const auto &u: arr) 
-   { 
-       key = u; 
-       j = i-1; 
- 
-       while (j >= 0 && arr[j] > key) 
-       { 
-           arr[j+1] = arr[j]; 
-           j = j-1; 
-       } 
-       arr[j+1] = key; 
-       i++;
-   } 
-} 
-
-
 
 template<typename T>
 void mysort(vector<T>& V)
 {
-  //
-  // TODO: replace the call to std::sort with whatever sort you want,
-  // efficiency is not important.  Compare elements using <, > or ==.
-  // 
- // int mid = V.size()/2;
- // int left = 
   int i = 1;
     auto key = V[0];
     int j = 0; 
@@ -168,15 +135,7 @@ void mysort(vector<T>& V)
 template<typename T>
 void mysort(vector<T>& V, std::function<bool(T,T)> compare)
 {
-  //
-  // TODO: replace the call to std::sort with whatever sort you want,
-  // efficiency is not important.  In this case, since a lambda expression
-  // is provided, call that function to determine when to swap --- do not
-  // compare elements using <, > or ==.
-  // 
-  // The compare function takes 2 elements of the vector, and returns true 
-  // if the 1st one should precede the 2nd one.  Returns false if not.
-  // 
+  
   int i = 1;
     auto key = V[0];
     int j = 0; 
@@ -185,7 +144,7 @@ void mysort(vector<T>& V, std::function<bool(T,T)> compare)
        key = V[i]; 
        j = i-1; 
  
-       while (j >= 0 && compare(V[j], key)== false) 
+       while (j >= 0 && !compare(V[j], key)) 
        { 
            V[j+1] = V[j]; 
            j = j-1; 
@@ -279,10 +238,23 @@ int main()
   
   while (name != "#")
   {
-    //
-    // TODO: call std::find_if to find student with name matching user's input.
-    // Output "not found" or student's name:examavg
-    //
+
+    double examavg = 0.0;
+    auto g = std::find_if(V3.begin(), V3.end(),
+                [&name, &examavg](Student &s1){
+                   if(s1.Name.compare(name) == 0){
+                       examavg = s1.ExamAvg();
+                       return true;
+                   }else{
+                       return false;
+                   }
+                });
+      if(g == V3.end()){
+          cout << "not found" << endl;
+      }
+      else{
+          cout << examavg << endl;
+      }
     
     cout << "Please enter a name (or #)> ";
     cin >> name;
