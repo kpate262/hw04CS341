@@ -149,7 +149,7 @@ void mysort(vector<T>& V)
        key = V[i]; 
        j = i-1; 
  
-       while (j >= 0 && V[j] > key) 
+       while (V[j] > key) 
        { 
            V[j+1] = V[j]; 
            j = j-1; 
@@ -157,8 +157,6 @@ void mysort(vector<T>& V)
        V[j+1] = key; 
        //i++;
    }
-    
-  //std::sort(V.begin(), V.end());
 }
 
 
@@ -179,7 +177,22 @@ void mysort(vector<T>& V, std::function<bool(T,T)> compare)
   // The compare function takes 2 elements of the vector, and returns true 
   // if the 1st one should precede the 2nd one.  Returns false if not.
   // 
-  std::sort(V.begin(), V.end(), compare);
+  int i = 1;
+    auto key = V[0];
+    int j = 0; 
+   for (i = 1; i < V.size(); i++) 
+   { 
+       key = V[i]; 
+       j = i-1; 
+ 
+       while (j >= 0 && compare(V[j], key)== false) 
+       { 
+           V[j+1] = V[j]; 
+           j = j-1; 
+       } 
+       V[j+1] = key; 
+       //i++;
+   }
 }
 
 
