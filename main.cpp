@@ -1,7 +1,7 @@
 /*main.cpp*/
 
 //
-// <<Kisan Patel>>
+// <<Kisan Patel >>
 // U. of Illinois, Chicago
 // CS 341, Spring 2019
 // HW #04: working with C++ and the STL
